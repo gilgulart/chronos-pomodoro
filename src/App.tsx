@@ -1,12 +1,13 @@
-import './styles/theme.css'
-import './styles/global.css'
+import './styles/theme.css';
+import './styles/global.css';
 import { Heading } from './components/Heading';
 
 export function App() {
-  console.log('oi');
   return (
     <>
-      <Heading/>
+      <Heading>Olá mundo!1</Heading>
+      <Heading>Olá mundo!2</Heading>
+      <Heading>Olá mundo!3</Heading>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum quibusdam
         quis officiis neque cupiditate incidunt magnam nemo fugiat aperiam
