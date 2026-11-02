@@ -1,4 +1,5 @@
 {
+  "workbench.editor.labelFormat": "short",
   "files.eol": "\n",
 
   // 🛠 Formatação e Lint
