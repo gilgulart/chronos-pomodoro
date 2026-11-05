@@ -1,3 +1,5 @@
+import { Input } from '../Input';
+
 import styles from './styles.module.css';
 
 export function Form() {
@@ -5,20 +7,27 @@ export function Form() {
     <>
       <form className={styles.form} action=''>
         <div className={styles.formRow}>
-          <label htmlFor={styles.meuInput}>Task</label>
-          <input id={styles.meuInput} type='text' />
+          <Input 
+          id='meuInput' 
+          type='text' 
+          labelText='Task:'
+          placeholder='Digite algo'
+          ></Input>
         </div>
 
         <div className='formRow'>
           <p>
-            Lorem ipsum dolor sit amet!
+            Nesse ciclo <strong>descanse</strong> por
           </p>
         </div>
-        
+
         <div className='formRow'>
-          <p>
-            Nesse ciclo <strong>descanse</strong> por 
-          </p>
+          <p>Ciclos</p>
+          <p>0 0 0 0 0 0 0</p>
+        </div>
+
+        <div className='formRow'>
+          <button>Enviar</button>
         </div>
       </form>
     </>

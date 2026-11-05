@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.6rem;
+  gap: 1.2rem;
 
   padding-top: 1.5rem;
 
@@ -19,7 +19,6 @@
 }
 
 .menuLink {
-
   transition: all 0.1s ease-in-out;
 }
 
