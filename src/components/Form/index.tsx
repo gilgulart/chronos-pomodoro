@@ -29,7 +29,7 @@ export function Form() {
 
         <div className='formRow'>
           <DefaultButton id='runButton' icon={<PlayCircleIcon/>} color='green'></DefaultButton>
-          {/* <DefaultButton id='runButton' icon={<StopCircleIcon/>} color='red'></DefaultButton> */}
+          <DefaultButton id='runButton' icon={<StopCircleIcon/>} color='red'></DefaultButton>
         </div>
       </form>
     </>
