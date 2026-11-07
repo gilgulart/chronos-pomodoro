@@ -1,6 +1,7 @@
 {
   "workbench.editor.labelFormat": "short",
   "files.eol": "\n",
+  "explorer.compactFolders": false,
 
   // 🛠 Formatação e Lint
   "editor.formatOnSave": true,
@@ -16,11 +17,11 @@
   },
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }, 
+  },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[typescriptreact]":{
+  "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[xml]": {
