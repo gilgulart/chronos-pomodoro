@@ -1,14 +1,16 @@
 import styles from './styles.module.css';
-import { House } from 'lucide-react';
-import { RotateCcwClock } from 'lucide-react';
-import { Settings } from 'lucide-react';
-import { Sun } from 'lucide-react';
+import { Sun, Moon, House, RotateCcwClock, Settings } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 type AvailableThemes = 'dark' | 'light';
 
 export function Menu() {
-  const [theme, setTheme] = useState<AvailableThemes>('dark');
+  const [theme, setTheme] = useState<AvailableThemes>(() => {
+    const storageTheme =
+      (localStorage.getItem('theme') as AvailableThemes) || 'dark';
+    return storageTheme;
+  });
+
 
   function handleThemeChange(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -23,7 +25,13 @@ export function Menu() {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }, [theme]);
+
+  const nextThemeIcon = {
+    dark: <Sun />,
+    light: <Moon />,
+  };
 
   return (
     <nav className={styles.menu}>
@@ -64,7 +72,7 @@ export function Menu() {
         title='Mudar tema'
       >
         <button onClick={handleThemeChange}>
-          <Sun></Sun>
+          {nextThemeIcon[theme]}
         </button>
       </a>
     </nav>
