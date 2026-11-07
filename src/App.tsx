@@ -3,12 +3,13 @@ import { Logo } from './components/Logo';
 import { Menu } from './components/Menu';
 import { CountDown } from './components/CountDown';
 import { Form } from './components/Form';
-import { Footer } from "./components/Footer";
+import { Footer } from './components/Footer';
 
 import './styles/theme.css';
 import './styles/global.css';
 
 export function App() {
+
   return (
     <>
       <Container>
@@ -28,7 +29,7 @@ export function App() {
       </Container>
 
       <Container>
-      <Footer></Footer>
+        <Footer></Footer>
       </Container>
     </>
   );
