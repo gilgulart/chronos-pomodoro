@@ -11,7 +11,6 @@ export function Menu() {
     return storageTheme;
   });
 
-
   function handleThemeChange(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) {
@@ -71,9 +70,7 @@ export function Menu() {
         aria-label='Mudar tema'
         title='Mudar tema'
       >
-        <button onClick={handleThemeChange}>
-          {nextThemeIcon[theme]}
-        </button>
+        <button onClick={handleThemeChange}>{nextThemeIcon[theme]}</button>
       </a>
     </nav>
   );

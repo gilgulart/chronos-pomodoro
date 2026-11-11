@@ -2,27 +2,20 @@ import { Input } from '../Input';
 import { Cycles } from '../Cycles';
 import { DefaultButton } from '../DefaultButton';
 import styles from './styles.module.css';
-import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
-import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
+import { PlayCircleIcon } from 'lucide-react';
+import type { SubmitEventHandler } from 'react';
+// import { StopCircleIcon } from 'lucide-react';
 
 export function Form() {
-  const { setState } = useTaskContext()
-
-  function handleClick() {
-    setState(prevState => {
-      return {
-        ...prevState,
-        formattedSecondsRemaining: "21:00"
-      }
-    })
-  }
+  const handleCreateNewTask: SubmitEventHandler<HTMLFormElement> = event => {
+    event.preventDefault();
+    console.log('deu certo');
+  };
 
   return (
     <>
-      <form className={styles.form} action=''>
-        <div>
-          <button type='button' onClick={handleClick}>Clicar</button>
-        </div>
+      <form className={styles.form} onSubmit={handleCreateNewTask} action=''>
+        <div></div>
         <div className={styles.formRow}>
           <Input
             id='meuInput'
@@ -46,11 +39,11 @@ export function Form() {
             icon={<PlayCircleIcon />}
             color='green'
           ></DefaultButton>
-          <DefaultButton
+          {/* <DefaultButton
             id='runButton'
             icon={<StopCircleIcon />}
             color='red'
-          ></DefaultButton>
+          ></DefaultButton> */}
         </div>
       </form>
     </>
