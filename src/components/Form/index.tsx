@@ -3,7 +3,7 @@ import { Cycles } from '../Cycles';
 import { DefaultButton } from '../DefaultButton';
 import styles from './styles.module.css';
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
-import { useTaskContext } from '../../contexts/TaskContext';
+import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 
 export function Form() {
   const { setState } = useTaskContext()
