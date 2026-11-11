@@ -1,75 +1,67 @@
-# React + TypeScript + Vite
+# Chronos Pomodoro ⏱️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**A Pomodoro timer application built with React and TypeScript.**
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🇧🇷 Português (Brasil)
 
-## React Compiler
+### Sobre o projeto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+O **Chronos Pomodoro** é um projeto educacional desenvolvido como parte dos meus estudos no curso de **React e Nest.js do professor Luís Otávio Miranda**.
 
-## Expanding the ESLint configuration
+O objetivo é aplicar na prática os conceitos e ferramentas apresentados durante o curso, aprofundando meus conhecimentos em React, TypeScript, gerenciamento de estado e organização de projetos.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+A aplicação utiliza a técnica Pomodoro para auxiliar na organização do tempo e na produtividade durante os estudos e atividades diárias.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Tecnologias utilizadas
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React
+- TypeScript
+- Vite
+- CSS Modules
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Funcionalidades
 
-```
+- Temporizador baseado na técnica Pomodoro.
+- Visualização dos ciclos de trabalho e descanso.
+- Alternância entre tema claro e escuro.
+- Gerenciamento de estados com React Hooks.
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### Objetivo educacional
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Este projeto faz parte da minha jornada de aprendizado em desenvolvimento de software. Sua implementação acompanha os conteúdos apresentados no curso, com adaptações e experimentações realizadas durante os estudos.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
-```
+## 🇺🇸 English
+
+### About the project
+
+**Chronos Pomodoro** is an educational project developed as part of my learning journey through **Luis Otavio Miranda's React and Nest.js course**.
+
+The main goal is to put the concepts and tools covered in the course into practice while improving my knowledge of React, TypeScript, state management, and project organization.
+
+The application uses the Pomodoro Technique to help users manage their time and improve productivity during study sessions and daily activities.
+
+### Technologies
+
+- React
+- TypeScript
+- Vite
+- CSS Modules
+
+### Features
+
+- Pomodoro-based timer.
+- Work and break cycle visualization.
+- Light and dark theme switching.
+- State management with React Hooks.
+
+### Educational Purpose
+
+This project is part of my software development learning journey. Its implementation follows the topics covered in the course, with additional adaptations and experiments carried out throughout the learning process.
+
+---
+
+**Disclaimer:** This is an independent educational project created for learning purposes. It is not an official project or product affiliated with the course instructor.
