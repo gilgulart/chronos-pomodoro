@@ -3,21 +3,20 @@ import { Cycles } from '../Cycles';
 import { DefaultButton } from '../DefaultButton';
 import styles from './styles.module.css';
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
-import type { HomeProps } from '../../pages/Home';
+import { useTaskContext } from '../../contexts/TaskContext';
 
-export function Form({ state, setState }: HomeProps) {
+export function Form() {
+  const { setState } = useTaskContext()
+
   function handleClick() {
     setState(prevState => {
       return {
         ...prevState,
-        config: {
-          ...prevState.config,
-          workTime: 34,
-        },
-        formattedSecondsRemaining: "23:34"
-      };
-    });
+        formattedSecondsRemaining: "21:00"
+      }
+    })
   }
+
   return (
     <>
       <form className={styles.form} action=''>
@@ -34,7 +33,7 @@ export function Form({ state, setState }: HomeProps) {
         </div>
 
         <div className='formRow'>
-          <p>Próximo intervalo é de {state.config.workTime}min </p>
+          <p>Próximo intervalo é de min </p>
         </div>
 
         <div className='formRow'>
