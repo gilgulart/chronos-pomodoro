@@ -3,13 +3,15 @@ import { Cycles } from '../Cycles';
 import { DefaultButton } from '../DefaultButton';
 import styles from './styles.module.css';
 import { PlayCircleIcon } from 'lucide-react';
-import type { SubmitEventHandler } from 'react';
+import { useState, type SubmitEventHandler } from 'react';
 // import { StopCircleIcon } from 'lucide-react';
 
 export function Form() {
+  const [taskName, setTaskName] = useState('');
+
   const handleCreateNewTask: SubmitEventHandler<HTMLFormElement> = event => {
     event.preventDefault();
-    console.log('deu certo');
+    console.log('deu certo', taskName);
   };
 
   return (
@@ -22,6 +24,8 @@ export function Form() {
             type='text'
             labelText='Task:'
             placeholder='Digite algo'
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
           ></Input>
         </div>
 
