@@ -7,6 +7,7 @@ import { useRef, type SubmitEventHandler } from 'react';
 import type { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCycleType } from '../../utils/getNextCycleType';
 // import { StopCircleIcon } from 'lucide-react';
 
 export function Form() {
@@ -15,6 +16,8 @@ export function Form() {
   
   //ciclos
   const nextCycle = getNextCycle(state.currentCycle)
+  const nextCycleType = getNextCycleType(nextCycle)
+
   console.log(nextCycle);
    
 
@@ -36,7 +39,7 @@ export function Form() {
       completeDate: null,
       interruptDate: null,
       duration: 1,
-      type: 'workTime',
+      type: nextCycleType,
     };
 
     const secondsRemaining = newTask.duration * 60
