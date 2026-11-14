@@ -8,6 +8,7 @@ import type { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
+import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 // import { StopCircleIcon } from 'lucide-react';
 
 export function Form() {
@@ -38,7 +39,7 @@ export function Form() {
       startDate: Date.now(),
       completeDate: null,
       interruptDate: null,
-      duration: 1,
+      duration: state.config[nextCycleType],
       type: nextCycleType,
     };
 
@@ -51,7 +52,7 @@ export function Form() {
         activeTask: newTask,
         currentCycle: nextCycle, //Conferir
         secondsRemaining, //Conferir
-        formattedSecondsRemaining: '00:00',//Conferir
+        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),//Conferir
         tasks: [...prevState.tasks, newTask],
         config: {...prevState.config}
       }
