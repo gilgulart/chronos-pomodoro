@@ -10,6 +10,7 @@ import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
 import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 import { StopCircleIcon } from 'lucide-react';
+import type { MouseEvent } from 'react';
 
 export function Form() {
   const { state, setState } = useTaskContext();
@@ -57,6 +58,28 @@ export function Form() {
     });
   };
 
+  function handleInterruptTask(
+  e: MouseEvent<HTMLButtonElement>
+) {
+  e.preventDefault();
+
+  setState(prevState => {
+    return {
+      ...prevState,
+      activeTask: null,
+      currentCycle: nextCycle,
+      secondsRemaining: 0,
+      formattedSecondsRemaining: '00:00',
+      tasks: prevState.tasks.map(task => {
+        if (prevState.activeTask && prevState.activeTask.id === task.id){
+          return {...task, interruptDate: Date.now()};
+        }
+        return task;
+      })
+    };
+  });
+}
+
   return (
     <>
       <form className={styles.form} onSubmit={handleCreateNewTask} action=''>
@@ -83,7 +106,7 @@ export function Form() {
         )}
 
         <div className='formRow'>
-          {!state.activeTask ? (
+          {!state.activeTask && (
             <DefaultButton
               aria-label='iniciar nova tarefa'
               type='submit'
@@ -91,8 +114,11 @@ export function Form() {
               icon={<PlayCircleIcon />}
               color='green'
             ></DefaultButton>
-          ) : (
+          )}
+
+         {!!state.activeTask && (
             <DefaultButton
+              onClick={handleInterruptTask}
               aria-label='Interromper tarefa atual'
               title='Interromper tarefa atual'
               type='button'
