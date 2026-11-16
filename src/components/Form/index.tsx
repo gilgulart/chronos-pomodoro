@@ -9,29 +9,28 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
 import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
-// import { StopCircleIcon } from 'lucide-react';
+import { StopCircleIcon } from 'lucide-react';
 
 export function Form() {
-  const {state, setState} = useTaskContext()
+  const { state, setState } = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null);
-  
+
   //ciclos
-  const nextCycle = getNextCycle(state.currentCycle)
-  const nextCycleType = getNextCycleType(nextCycle)
+  const nextCycle = getNextCycle(state.currentCycle);
+  const nextCycleType = getNextCycleType(nextCycle);
 
   console.log(nextCycle);
-   
 
   const handleCreateNewTask: SubmitEventHandler<HTMLFormElement> = event => {
     event.preventDefault();
     if (taskNameInput.current === null) return;
-    
+
     const taskName = taskNameInput.current.value.trim();
-    
-    if(!taskName){
-      alert('Digite o nome da tarefa')
-      return
-    };
+
+    if (!taskName) {
+      alert('Digite o nome da tarefa');
+      return;
+    }
 
     const newTask: TaskModel = {
       id: Date.now().toString(),
@@ -43,8 +42,7 @@ export function Form() {
       type: nextCycleType,
     };
 
-    const secondsRemaining = newTask.duration * 60
-
+    const secondsRemaining = newTask.duration * 60;
 
     setState(prevState => {
       return {
@@ -52,11 +50,11 @@ export function Form() {
         activeTask: newTask,
         currentCycle: nextCycle, //Conferir
         secondsRemaining, //Conferir
-        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),//Conferir
+        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining), //Conferir
         tasks: [...prevState.tasks, newTask],
-        config: {...prevState.config}
-      }
-    })
+        config: { ...prevState.config },
+      };
+    });
   };
 
   return (
@@ -70,6 +68,7 @@ export function Form() {
             labelText='Task:'
             placeholder='Digite algo'
             ref={taskNameInput}
+            disabled={!!state.activeTask}
           ></Input>
         </div>
 
@@ -77,21 +76,33 @@ export function Form() {
           <p>Próximo intervalo é de min </p>
         </div>
 
-        <div className='formRow'>
-          <Cycles></Cycles>
-        </div>
+        {state.currentCycle > 0 && (
+          <div className='formRow'>
+            <Cycles></Cycles>
+          </div>
+        )}
 
         <div className='formRow'>
-          <DefaultButton
-            id='runButton'
-            icon={<PlayCircleIcon />}
-            color='green'
-          ></DefaultButton>
-          {/* <DefaultButton
-            id='runButton'
-            icon={<StopCircleIcon />}
-            color='red'
-          ></DefaultButton> */}
+          {!state.activeTask ? (
+            <DefaultButton
+              aria-label='iniciar nova tarefa'
+              type='submit'
+              id='runButton'
+              icon={<PlayCircleIcon />}
+              color='green'
+            ></DefaultButton>
+          ) : (
+            <DefaultButton
+              aria-label='Interromper tarefa atual'
+              title='Interromper tarefa atual'
+              type='button'
+              id='runButton'
+              icon={<StopCircleIcon />}
+              color='red'
+            ></DefaultButton>
+          )}
+
+          {/*  */}
         </div>
       </form>
     </>
