@@ -8,31 +8,30 @@ import type { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
-import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 import { StopCircleIcon } from 'lucide-react';
 import type { MouseEvent } from 'react';
+import { TaskActionsTypes } from '../../contexts/TaskContext/taskActions';
 
 export function Form() {
-  const { state, setState } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null);
 
-  //ciclos
   const nextCycle = getNextCycle(state.currentCycle);
   const nextCycleType = getNextCycleType(nextCycle);
 
-  console.log(nextCycle);
-
   const handleCreateNewTask: SubmitEventHandler<HTMLFormElement> = event => {
+    
     event.preventDefault();
+
     if (taskNameInput.current === null) return;
-
+    
     const taskName = taskNameInput.current.value.trim();
-
+    
     if (!taskName) {
       alert('Digite o nome da tarefa');
       return;
     }
-
+    
     const newTask: TaskModel = {
       id: Date.now().toString(),
       name: taskName,
@@ -43,45 +42,21 @@ export function Form() {
       type: nextCycleType,
     };
 
-    const secondsRemaining = newTask.duration * 60;
-
-    setState(prevState => {
-      return {
-        ...prevState,
-        activeTask: newTask,
-        currentCycle: nextCycle, //Conferir
-        secondsRemaining, //Conferir
-        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining), //Conferir
-        tasks: [...prevState.tasks, newTask],
-        config: { ...prevState.config },
-      };
-    });
-  };
-
+    dispatch({type: TaskActionsTypes.START_TASK, payload: newTask });
+    
+  }
+  
   function handleInterruptTask(
-  e: MouseEvent<HTMLButtonElement>
-) {
-  e.preventDefault();
-
-  setState(prevState => {
-    return {
-      ...prevState,
-      activeTask: null,
-      currentCycle: nextCycle,
-      secondsRemaining: 0,
-      formattedSecondsRemaining: '00:00',
-      tasks: prevState.tasks.map(task => {
-        if (prevState.activeTask && prevState.activeTask.id === task.id){
-          return {...task, interruptDate: Date.now()};
-        }
-        return task;
-      })
-    };
-  });
-}
-
-  return (
-    <>
+    e: MouseEvent<HTMLButtonElement>
+  ) {
+    e.preventDefault();
+    
+    dispatch({type: TaskActionsTypes.INTERRUPT_TASK});
+  };
+    
+            
+            return (
+              <>
       <form className={styles.form} onSubmit={handleCreateNewTask} action=''>
         <div></div>
         <div className={styles.formRow}>
@@ -134,3 +109,4 @@ export function Form() {
     </>
   );
 }
+
