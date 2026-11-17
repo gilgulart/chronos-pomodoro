@@ -1,36 +1,23 @@
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { TaskContext } from './TaskContext';
 import { initialTaskState } from './initialTaskState';
+import { taskReducer } from './taskReducer';
 
 type TaskContextProviderProps = {
   children: React.ReactNode;
 };
 
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
-  const [state, setState] = useState(initialTaskState);
+  const [state, dispatch] = useReducer(taskReducer,initialTaskState);
 
-  // useEffect(() => {
-  //   console.log(state);
-  // }, [state]);
-  const [number, dispatch] = useReducer((state, action) => {
-    console.log(state, action);
-    switch (action){
-      case 'INCREMENT':
-        return state + 1;
-      case 'DECREMENT':
-        return state - 1;
-      case 'INITIAL':
-        return 0;
-    }
-    return state;
-  }, 0)
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+ 
 
   return (
-    <TaskContext.Provider value={{ state, setState }}>
-      <h1>O número é: {number}</h1>
-      <button onClick={() => dispatch('INCREMENT')}>Incrementar</button>
-      <button onClick={() => dispatch('DECREMENT')}>Decrementar</button>
-      <button onClick={() => dispatch('INITIAL')}>Zerar</button>
+    <TaskContext.Provider value={{ state, dispatch }}>
+      {children}
     </TaskContext.Provider>
   );
 }
