@@ -11,6 +11,7 @@ import { getNextCycleType } from '../../utils/getNextCycleType';
 import { StopCircleIcon } from 'lucide-react';
 import type { MouseEvent } from 'react';
 import { TaskActionsTypes } from '../../contexts/TaskContext/taskActions';
+import { Tips } from '../Tips';
 
 export function Form() {
   const { state, dispatch } = useTaskContext();
@@ -18,6 +19,8 @@ export function Form() {
 
   const nextCycle = getNextCycle(state.currentCycle);
   const nextCycleType = getNextCycleType(nextCycle);
+
+  
 
   const handleCreateNewTask: SubmitEventHandler<HTMLFormElement> = event => {
     
@@ -71,7 +74,7 @@ export function Form() {
         </div>
 
         <div className='formRow'>
-          <p>Próximo intervalo é de min </p>
+            <Tips></Tips>
         </div>
 
         {state.currentCycle > 0 && (
