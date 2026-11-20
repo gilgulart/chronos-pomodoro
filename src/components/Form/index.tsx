@@ -20,21 +20,18 @@ export function Form() {
   const nextCycle = getNextCycle(state.currentCycle);
   const nextCycleType = getNextCycleType(nextCycle);
 
-  
-
   const handleCreateNewTask: SubmitEventHandler<HTMLFormElement> = event => {
-    
     event.preventDefault();
 
     if (taskNameInput.current === null) return;
-    
+
     const taskName = taskNameInput.current.value.trim();
-    
+
     if (!taskName) {
       alert('Digite o nome da tarefa');
       return;
     }
-    
+
     const newTask: TaskModel = {
       id: Date.now().toString(),
       name: taskName,
@@ -45,21 +42,23 @@ export function Form() {
       type: nextCycleType,
     };
 
-    dispatch({type: TaskActionsTypes.START_TASK, payload: newTask });
-    
-  }
-  
-  function handleInterruptTask(
-    e: MouseEvent<HTMLButtonElement>
-  ) {
-    e.preventDefault();
-    
-    dispatch({type: TaskActionsTypes.INTERRUPT_TASK});
+    dispatch({ type: TaskActionsTypes.START_TASK, payload: newTask });
+
+    const worker = new Worker(
+      new URL('../../workers/timerWorker.js', import.meta.url),
+    );
+
+    worker.postMessage('Olá Mundo!')
   };
-    
-            
-            return (
-              <>
+
+  function handleInterruptTask(e: MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+
+    dispatch({ type: TaskActionsTypes.INTERRUPT_TASK });
+  }
+
+  return (
+    <>
       <form className={styles.form} onSubmit={handleCreateNewTask} action=''>
         <div></div>
         <div className={styles.formRow}>
@@ -74,7 +73,7 @@ export function Form() {
         </div>
 
         <div className='formRow'>
-            <Tips></Tips>
+          <Tips></Tips>
         </div>
 
         {state.currentCycle > 0 && (
@@ -94,7 +93,7 @@ export function Form() {
             ></DefaultButton>
           )}
 
-         {!!state.activeTask && (
+          {!!state.activeTask && (
             <DefaultButton
               onClick={handleInterruptTask}
               aria-label='Interromper tarefa atual'
@@ -112,4 +111,3 @@ export function Form() {
     </>
   );
 }
-
